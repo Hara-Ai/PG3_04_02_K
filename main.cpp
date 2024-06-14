@@ -1,34 +1,44 @@
 #include <stdio.h>
 #include <iostream>
 
-// クラステンプレートを定義
-template <typename T1, typename T2>
-class Compare
+template<typename Type1, typename Type2>
+class TemplateClass
+
 {
 public:
-    auto Min(T1 a, T2 b) -> decltype(a < b ? a : b)
-    {
-        return (a < b) ? a : b;
-    }
+	TemplateClass(Type1 number1, Type2 number2) : number1(number1), number2(number2) {}
+
+	Type1 Min()
+	{
+		if (number1 < number2)
+		{
+			return static_cast<Type1>(number1);
+		}
+		else {
+			return static_cast<Type2>(number2);
+		}
+	};
+private:
+	Type1  number1;
+	Type2 number2;
 };
 
 int main() {
-    Compare<int, int> compInt;
-    Compare<float, float> compFloat;
-    Compare<double, double> compDouble;
-    Compare<int, float> compIntFloat;
-    Compare<int, double> compIntDouble;
-    Compare<float, double> compFloatDouble;
 
-    // 同じ型での計算結果表示
-    std::cout << "Min(3, 5) int: " << compInt.Min(3, 5) << std::endl;
-    std::cout << "Min(3.5f, 2.5f) float: " << compFloat.Min(3.5f, 2.5f) << std::endl;
-    std::cout << "Min(7.8, 2.3) double: " << compDouble.Min(7.8, 2.3) << std::endl;
+	/*クラス名から型を考えて<>の中を定義しよう*/
+	TemplateClass<int, float> intFloatTemplate(10, 50.0f);
+	TemplateClass<int, double> intDoubleTemplate(80, 13.0);
+	TemplateClass<float, int > floatIntTemplate(2.0f, 9);
+	TemplateClass<float, double > floatDoubleTemplate(11.0f, 3.5);
+	TemplateClass<double, int > doubleIntTemplate(666.0, 333);
+	TemplateClass<double, float > doubleFloatTemplate(435.8, 563.5f);
 
-    // 型を混ぜた組み合わせの計算結果表示
-    std::cout << "Min(3, 5.5f) int-float: " << compIntFloat.Min(3, 5.5f) << std::endl;
-    std::cout << "Min(3, 6.7) int-double: " << compIntDouble.Min(3, 6.7) << std::endl;
-    std::cout << "Min(5.5f, 6.7) float-double: " << compFloatDouble.Min(5.5f, 6.7) << std::endl;
+	std::cout << "int(10)　と float(50.0f) を比べて小さい数字を表す：" << intFloatTemplate.Min() << std::endl;
+	std::cout << "int(80)　と double(13.0) を比べて小さい数字を表す：" << intDoubleTemplate.Min() << std::endl;
+	std::cout << "float(2.0f)　と int(9) を比べて小さい数字を表す：" << floatIntTemplate.Min() << std::endl;
+	std::cout << "float(11.0f)　と double(3.5) を比べて小さい数字を表す：" << floatDoubleTemplate.Min() << std::endl;
+	std::cout << "double(666.0)　と int(333) を比べて小さい数字を表す：" << doubleIntTemplate.Min() << std::endl;
+	std::cout << "double(435.8)　と float(563.5) を比べて小さい数字を表す：" << doubleFloatTemplate.Min() << std::endl;
 
-    return 0;
+	return 0;
 }
