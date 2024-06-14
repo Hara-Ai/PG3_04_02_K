@@ -19,13 +19,13 @@ public:
 		}
 	};
 private:
-	Type1  number1;
+	Type1 number1;
 	Type2 number2;
 };
 
 int main() {
 
-	/*クラス名から型を考えて<>の中を定義しよう*/
+	
 	TemplateClass<int, float> intFloatTemplate(10, 50.0f);
 	TemplateClass<int, double> intDoubleTemplate(80, 13.0);
 	TemplateClass<float, int > floatIntTemplate(2.0f, 9);
