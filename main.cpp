@@ -1,11 +1,12 @@
+#include <stdio.h>
 #include <iostream>
 
 // クラステンプレートを定義
 template <typename T1, typename T2>
-class Compare 
+class Compare
 {
 public:
-    auto Min(T1 a, T2 b) -> decltype(a < b ? a : b) 
+    auto Min(T1 a, T2 b) -> decltype(a < b ? a : b)
     {
         return (a < b) ? a : b;
     }
